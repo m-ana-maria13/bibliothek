@@ -21,11 +21,11 @@ public class Bibliothek {
         return titel;
     }
 
-    public double durchschnitt(ArrayList<String> list_title) {
+    public double durchschnitt(ArrayList<String> list_titel) {
         int nr = 0;
         int sum = 0;
 
-        for (String titel : list_title) {
+        for (String titel : list_titel) {
             for (Buch b : bucher) {
                 if (b.getTitel().equals(titel)) {
                     sum += b.getSeiten();
@@ -39,5 +39,17 @@ public class Bibliothek {
             return 0;
         }
         return (double) sum / nr;
+    }
+
+    public ArrayList<String> bucher_kleinerGleich(double max_preis){
+        ArrayList<String> list_titel = new ArrayList<>();
+
+        for (Buch b : bucher) {
+            if(b.getPreis() <= max_preis)
+            {
+                list_titel.add(b.getTitel());
+            }
+        }
+        return list_titel;
     }
 }
