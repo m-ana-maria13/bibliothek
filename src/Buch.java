@@ -25,7 +25,5 @@ public class Buch {
         return preis;
     }
 
-    public int getAnz_seiten() {
-        return anz_seiten;
-    }
+    public int getSeiten() { return anz_seiten;}
 }

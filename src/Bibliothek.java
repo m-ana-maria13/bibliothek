@@ -8,7 +8,7 @@ public class Bibliothek {
         this.bucher = new ArrayList<>();
         for (Buch buch : b) {
             this.bucher.add(new Buch(buch.getTitel(), buch.getAutor(),
-                    buch.getPreis(), buch.getAnz_seiten()));
+                    buch.getPreis(), buch.getSeiten()));
         }
     }
 
@@ -19,5 +19,25 @@ public class Bibliothek {
                 titel.add(buch.getTitel());
         }
         return titel;
+    }
+
+    public double durchschnitt(ArrayList<String> list_title) {
+        int nr = 0;
+        int sum = 0;
+
+        for (String titel : list_title) {
+            for (Buch b : bucher) {
+                if (b.getTitel().equals(titel)) {
+                    sum += b.getSeiten();
+                    nr++;
+                }
+            }
+        }
+
+
+        if (nr == 0) {
+            return 0;
+        }
+        return (double) sum / nr;
     }
 }
