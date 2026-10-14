@@ -16,7 +16,7 @@ public class Main {
 
         Bibliothek bibliothek = new Bibliothek(list_bucher);
 //ub1
-        System.out.print("Autor: ");
+ /*       System.out.print("Autor: ");
         String autor = sc.nextLine();
 
         ArrayList<String> list = bibliothek.bucher_autor(autor);
@@ -27,8 +27,19 @@ public class Main {
                 System.out.println(l);
             }
         }
+*/
 
 //ub2
+        ArrayList<String> list_titel = new ArrayList<>();
+        String zeile = sc.nextLine();
+        while (!zeile.isEmpty()) {
+            list_titel.add(zeile);
+            zeile = sc.nextLine();
+        }
+        System.out.println(bibliothek.durchschnitt(list_titel));
 
     }
+
+//ub3
+
 }

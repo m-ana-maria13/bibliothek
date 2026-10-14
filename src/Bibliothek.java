@@ -52,4 +52,20 @@ public class Bibliothek {
         }
         return list_titel;
     }
+
+    public String teuerstes_buch(ArrayList<String> list_titel){
+        double max_preis = 0.0;
+        String titel = null;
+        for(String t : list_titel){
+            for(Buch b: bucher){
+                if(t.equals(b.getTitel()) && b.getPreis() > max_preis){
+                    max_preis = b.getPreis();
+                    titel = t;
+                }
+            }
+        }
+        if (titel == null)
+            return "";
+        return titel + " (" + max_preis + ")";
+    }
 }
