@@ -1,13 +1,34 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    IO.println(String.format("Hello and welcome!"));
+import java.util.ArrayList;
+import java.util.Scanner;
 
-    for (int i = 1; i <= 5; i++) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        IO.println("i = " + i);
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        ArrayList<Buch> list_bucher = new ArrayList<>();
+
+        list_bucher.add(new Buch("Clean Code", "Robert Martin", 45, 464));
+        list_bucher.add(new Buch("1984", "George Orwell", 18, 328));
+        list_bucher.add(new Buch("Animal Farm", "George Orwell", 12, 112));
+        list_bucher.add(new Buch("Java Basics", "Max Müller", 35, 520));
+        list_bucher.add(new Buch("The Hobbit", "J. R. R. Tolkien", 28, 310));
+
+        Bibliothek bibliothek = new Bibliothek(list_bucher);
+//ub1
+        System.out.print("Autor: ");
+        String autor = sc.nextLine();
+
+        ArrayList<String> list = bibliothek.bucher_autor(autor);
+        if (list.isEmpty()) {
+            System.out.println("Kein Buch mit diesen Autor.");
+        } else {
+            for (String l : list) {
+                System.out.println(l);
+            }
+        }
+
+//ub2
+
     }
 }

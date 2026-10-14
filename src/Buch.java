@@ -4,7 +4,7 @@ public class Buch {
     private double preis;
     private int anz_seiten;
 
-    public Buch(String titel, String autor, float preis, int anz_seiten){
+    public Buch(String titel, String autor, double preis, int anz_seiten){
         this.titel = titel;
         this.autor = autor;
         this.preis = preis;
