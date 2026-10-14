@@ -68,4 +68,14 @@ public class Bibliothek {
             return "";
         return titel + " (" + max_preis + ")";
     }
+
+    public ArrayList<String> mindestanz_seiten(int min_seiten){
+         ArrayList<String> list_titel = new ArrayList<>();
+         for(Buch b : bucher){
+             if(b.getSeiten() >= min_seiten){
+                 list_titel.add(b.getTitel());
+             }
+         }
+         return list_titel;
+    }
 }
