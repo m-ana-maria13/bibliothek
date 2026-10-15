@@ -12,22 +12,25 @@ public class Bibliothek {
         }
     }
 
-    public ArrayList<String> bucher_autor (String autor){
-        ArrayList<String> titel = new ArrayList<>();
-        for (Buch buch : bucher){
-            if(autor.equals(buch.getAutor()))
-                titel.add(buch.getTitel());
+    public ArrayList<String> bucher_autor(String autor) {
+        ArrayList<String> list_titel = new ArrayList<>();
+        for (Buch buch : bucher) {
+            if (autor.equals(buch.getAutor()))
+                list_titel.add(buch.getTitel());
         }
-        return titel;
+        if(list_titel.isEmpty())
+            return null;
+
+        return list_titel;
     }
 
     public double durchschnitt(ArrayList<String> list_titel) {
         int nr = 0;
         int sum = 0;
 
-        for (String titel : list_titel) {
+        for (String t : list_titel) {
             for (Buch b : bucher) {
-                if (b.getTitel().equals(titel)) {
+                if (b.getTitel().equals(t)) {
                     sum += b.getSeiten();
                     nr++;
                 }
@@ -35,47 +38,84 @@ public class Bibliothek {
         }
 
 
-        if (nr == 0) {
+        if (nr == 0)
             return 0;
-        }
+
         return (double) sum / nr;
     }
 
-    public ArrayList<String> bucher_kleinerGleich(double max_preis){
+    public ArrayList<String> bucher_biliger_als(double max_preis) {
         ArrayList<String> list_titel = new ArrayList<>();
 
         for (Buch b : bucher) {
-            if(b.getPreis() <= max_preis)
-            {
+            if (b.getPreis() <= max_preis) {
                 list_titel.add(b.getTitel());
             }
         }
+        if(list_titel.isEmpty())
+            return null;
+
         return list_titel;
     }
 
-    public String teuerstes_buch(ArrayList<String> list_titel){
+    public String teuerstes_buch(ArrayList<String> list_titel) {
         double max_preis = 0.0;
         String titel = null;
-        for(String t : list_titel){
-            for(Buch b: bucher){
-                if(t.equals(b.getTitel()) && b.getPreis() > max_preis){
+
+        for (String t : list_titel) {
+            for (Buch b : bucher) {
+                if (t.equals(b.getTitel()) && b.getPreis() > max_preis) {
                     max_preis = b.getPreis();
                     titel = t;
                 }
             }
         }
         if (titel == null)
-            return "";
+            return null;
+
         return titel + " (" + max_preis + ")";
     }
 
-    public ArrayList<String> mindestanz_seiten(int min_seiten){
-         ArrayList<String> list_titel = new ArrayList<>();
-         for(Buch b : bucher){
-             if(b.getSeiten() >= min_seiten){
-                 list_titel.add(b.getTitel());
-             }
-         }
-         return list_titel;
+    public ArrayList<String> mindest_anz_seiten(int min_seiten) {
+        ArrayList<String> list_titel = new ArrayList<>();
+        for (Buch b : bucher) {
+            if (b.getSeiten() >= min_seiten) {
+                list_titel.add(b.getTitel());
+            }
+        }
+        if(list_titel.isEmpty())
+            return null;
+
+        return list_titel;
+    }
+
+    public String komb_bucher(double buget) {
+        double maxPreis = 0.0;
+        int maxSeiten = 0;
+        String buch1 = null, buch2 = null;
+
+        for (int i = 0; i < bucher.size(); i++) {
+            for (int j = i + 1; j < bucher.size(); j++) {
+                Buch b1 = bucher.get(i);
+                Buch b2 = bucher.get(j);
+
+                double summe = b1.getPreis() + b2.getPreis();
+                int seiten = b1.getSeiten() + b2.getSeiten();
+
+                if (summe <= buget  &&
+                    (summe > maxPreis || (summe == maxPreis && seiten > maxSeiten))) {
+                    maxPreis = summe;
+                    maxSeiten = seiten;
+                    buch1 = b1.getTitel();
+                    buch2 = b2.getTitel();
+                }
+            }
+        }
+
+        if (buch1 == null)
+            return null;
+
+       return buch1 + " + " + buch2 + "\nGesamtpreis: " + maxPreis + " Euro";
+
     }
 }
