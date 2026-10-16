@@ -118,4 +118,16 @@ public class Bibliothek {
        return buch1 + " + " + buch2 + "\nGesamtpreis: " + maxPreis + " Euro";
 
     }
+
+    public static void print_string(ArrayList<String> liste){
+
+        if (liste == null || liste.isEmpty()) {
+            System.out.println("Kein solches Buch.");
+        }
+        else {
+            for (String l : liste) {
+                System.out.println(l);
+            }
+        }
+    }
 }
